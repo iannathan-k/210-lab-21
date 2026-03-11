@@ -15,13 +15,21 @@ class Goat {
         int age;
         string name;
         string color;
-        string names[SIZE] = {"Biscuit", "Clover", "Nibbles", "Pebble", "Maple", "Sprout", "Patches", "Juniper", "Tater", "Willow", "Pickles", "Hazel", "Muffin", "Acorn", "Butterscotch"};
-        string colors[SIZE] = {"White", "Black", "Brown", "Tan", "Cream", "Gray", "Spotted", "Speckled", "Caramel", "Chestnut", "Mahogany", "Silver", "Golden", "Ivory", "Mocha"};
+        string names[SIZE] = {
+            "Biscuit", "Clover", "Nibbles", "Pebble", "Maple", 
+            "Sprout", "Patches", "Juniper", "Tater", "Willow", 
+            "Pickles", "Hazel", "Muffin", "Acorn", "Butterscotch"
+        };
+        string colors[SIZE] = {
+            "White", "Black", "Brown", "Tan", "Cream", 
+            "Gray", "Spotted", "Speckled", "Caramel", "Chestnut",
+             "Mahogany", "Silver", "Golden", "Ivory", "Mocha"
+        };
     
     public:
         Goat() {
             age = rand() % (MAX_AGE - MIN_AGE + 1) + MIN_AGE;
-            name = names[rand() % SIZE];
+            name = names[rand() % SIZE]; // Range is actually 0-14, so this will do
             color = colors[rand() % SIZE];
         }
 
@@ -40,7 +48,7 @@ class Goat {
 class DoublyLinkedList {
 private:
     struct Node {
-        Goat data;
+        Goat data; // Doesn't say that we have to point to a goat, so we just use the object
         Node* prev;
         Node* next;
         Node(Goat val, Node* p = nullptr, Node* n = nullptr) {
@@ -58,7 +66,7 @@ public:
     DoublyLinkedList() { head = nullptr; tail = nullptr; }
 
     void push_back(Goat value) {
-        Node* newNode = new Node(value);
+        Node* newNode = new Node(value); // Directly passes in a goat
         if (!tail)  // if there's no tail, the list is empty
             head = tail = newNode;
         else {
@@ -79,6 +87,7 @@ public:
         }
     }
 
+    // Must edit these 2 in order for program to compile
     void insert_after(Goat value, int position) {
         if (position < 0) {
             cout << "Position must be >= 0." << endl;
@@ -141,7 +150,7 @@ public:
             return;
         }
         while (current) {
-            cout << "\t" << current->data.getName() << " ";
+            cout << "\t" << current->data.getName() << " "; //\t just does the tab
             cout << "(" << current->data.getColor() << ", ";
             cout << current->data.getAge() << ")" << endl;
             current = current->next;
