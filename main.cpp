@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 // COMSC-210 | Lab 21 | Ian Kusmiantoro
@@ -13,14 +15,14 @@ class Goat {
         int age;
         string name;
         string color;
-        string names[SIZE];
-        string colors[SIZE];
+        string names[SIZE] = {"Biscuit", "Clover", "Nibbles", "Pebble", "Maple", "Sprout", "Patches", "Juniper", "Tater", "Willow", "Pickles", "Hazel", "Muffin", "Acorn", "Butterscotch"};
+        string colors[SIZE] = {"White", "Black", "Brown", "Tan", "Cream", "Gray", "Spotted", "Speckled", "Caramel", "Chestnut", "Mahogany", "Silver", "Golden", "Ivory", "Mocha"};
     
     public:
         Goat() {
             age = rand() % (MAX_AGE - MIN_AGE + 1) + MIN_AGE;
-            name = names[rand() % (SIZE + 1)];
-            color = colors[rand() % (SIZE + 1)];
+            name = names[rand() % SIZE];
+            color = colors[rand() % SIZE];
         }
 
         Goat(int a, string n, string c) {
@@ -28,6 +30,11 @@ class Goat {
             name = n;
             color = c;
         }
+
+        // Not mentioned but we need getters to actually print stuff
+        int getAge() {return age;}
+        string getName() {return name;}
+        string getColor() {return color;}
 };
 
 class DoublyLinkedList {
@@ -129,9 +136,14 @@ public:
 
     void print() {
         Node* current = head;
-        if (!current) return;
+        if (!current) {
+            cout << "List is empty";
+            return;
+        }
         while (current) {
-            cout << current->data << " ";
+            cout << "\t" << current->data.getName() << " ";
+            cout << "(" << current->data.getColor() << ", ";
+            cout << current->data.getAge() << ")" << endl;
             current = current->next;
         }
         cout << endl;
@@ -139,9 +151,14 @@ public:
 
     void print_reverse() {
         Node* current = tail;
-        if (!current) return;
+        if (!current) {
+            cout << "List is empty";
+            return;
+        }
         while (current) {
-            cout << current->data << " ";
+            cout << "\t" << current->data.getName() << " ";
+            cout << "(" << current->data.getColor() << ", ";
+            cout << current->data.getAge() << ")" << endl;
             current = current->prev;
         }
         cout << endl;
@@ -166,10 +183,10 @@ int main() {
     for (int i = 0; i < size; ++i)
         list.push_back(Goat());
 
-    cout << "List forward: ";
+    cout << "Forward: ";
     list.print();
 
-    cout << "List backward: ";
+    cout << "Backward: ";
     list.print_reverse();
 
     cout << "Deleting list, then trying to print.\n";
