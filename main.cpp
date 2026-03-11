@@ -192,10 +192,10 @@ int main() {
     for (int i = 0; i < size; ++i)
         list.push_back(Goat());
 
-    cout << "Forward: ";
+    cout << "Forward: " << endl;
     list.print();
 
-    cout << "Backward: ";
+    cout << "Backward: " << endl;
     list.print_reverse();
 
     cout << "Deleting list, then trying to print.\n";
